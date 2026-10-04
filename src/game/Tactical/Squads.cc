@@ -13,6 +13,7 @@
 #include "Map_Screen_Helicopter.h"
 #include "Overhead.h"
 #include "Overhead_Types.h"
+#include "Player_Command.h"
 #include "SGPFile.h"
 #include "ScreenIDs.h"
 #include "Soldier_Control.h"
@@ -159,6 +160,9 @@ BOOLEAN AddCharacterToSquad(SOLDIERTYPE* const s, INT8 const bSquadValue)
 
 			AddPlayerToGroup(g, *s);
 			SetGroupSectorValue(s->sSector, g);
+
+			// mercs unloaded from the chopper take the sector, like a squad arriving on foot
+			SetThisSectorAsPlayerControlled(s->sSector, FALSE);
 
 			// if we've just started a new squad
 			if (fNewSquad)
